@@ -46,8 +46,11 @@ hr {
 	padding: 0;
 }
 
-#wrapper {
-	padding: 10px;
+h2 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+	margin: 0;
 }
 
 ::selection { background-color: #000; color: #FF9000; }
@@ -73,16 +76,40 @@ select, select:-moz-focusring, select::-moz-focus-inner {
 	border: 0;
 }
 
-p {
-	background-color: #FFF;
-	text-align: justify;
-	text-justify: inter-word;
-	margin: 0;
+#wrapper {
 	padding: 20px;
 }
 
+#wrapper > #content {
+	margin-bottom: 10px;
+}
+
+#wrapper > #content:last-child {
+	margin-bottom: 0;
+}
+
+#wrapper > #content:only-child {
+	margin-bottom: 0;
+}
+
 #content {
-	padding: 10px;
+	padding: 20px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0,.6);
+	-o-box-shadow: 0px 0px 4px rgba(0, 0, 0,.6);
+	-webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0,.6);
+	-moz-box-shadow: 0px 0px 4px rgba(0, 0, 0,.6);
+}
+
+#content > * {
+	margin-bottom: 10px;
+}
+
+#content > *:last-child {
+	margin-bottom: 0;
+}
+
+#content > *:only-child {
+	margin-bottom: 0;
 }
 
 #const {
@@ -92,7 +119,6 @@ p {
 
 #const td {
 	vertical-align: top;
-	padding: 10px;
 	width: 50%;
 }
 
@@ -100,20 +126,12 @@ p {
 	margin-bottom: 10px;
 }
 
-#const td  > *:last-child {
+#const td > *:last-child {
 	margin-bottom: 0;
 }
 
 #const td > *:only-child {
 	margin-bottom: 0;
-}
-
-h2 {
-	font-size: 18px;
-	font-weight: bold;
-	color: #333;
-	margin: 0;
-	padding: 20px;
 }
 
 input[type="text"] {
@@ -247,8 +265,6 @@ input[type="checkbox"]:disabled+span {
 
 <script>
 function matchYoutubeUrl(url) {
-	//console.log('matchYoutubeUrl');
-	//var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 	var p = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 	return (url.match(p)) ? RegExp.$1 : false;
 }
@@ -258,18 +274,21 @@ function x_getdata() {
 	var ramka = document.getElementById("ramka");
 	var imghost = document.getElementById("imghost");
 	var imgcenter = document.getElementById("imgcenter");
+	var select = document.getElementById('wrapper');
 	var check = matchYoutubeUrl(url.value);
+
+	if (select.childElementCount > 1) {
+		select.removeChild(select.lastElementChild);
+	}
 
 	if (check == false || url.value.length == 0) {
 		document.getElementById("result").innerHTML = "Вставьте ссылку на youtube ролик";
-		document.getElementById("prev").innerHTML = "";
-		//console.log('stop!');
 		return;
 	}
 
 	var out, img, video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
 
-	switch (ramka.value) {
+	switch(ramka.value) {
 		case '1':
 			if (imghost.value == 1) {
 				img = "https://i.imgur.com/8shW7Ny.png";
@@ -277,7 +296,7 @@ function x_getdata() {
 				img = "https://viogit.github.io/ramka/img/1.png";
 			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
-    	break;
+			break;
 		case '2':
 			if (imghost.value == 1) {
 				img = "https://i.imgur.com/szJWOKV.png";
@@ -285,7 +304,7 @@ function x_getdata() {
 				img = "https://viogit.github.io/ramka/img/2.png";
 			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
-		break;
+			break;
 		case '3':
 			if (imghost.value == 1) {
 				img = "https://i.imgur.com/4JMY3MH.png";
@@ -293,7 +312,7 @@ function x_getdata() {
 				img = "https://viogit.github.io/ramka/img/3.png";
 			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
-		break;
+			break;
 		case '4':
 			if (imghost.value == 1) {
 				img = "https://i.imgur.com/H4qWT3J.png";
@@ -301,7 +320,7 @@ function x_getdata() {
 				img = "https://viogit.github.io/ramka/img/4.png";
 			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
-		break;
+			break;
 		case '5':
 			if (imghost.value == 1) {
 				img = "https://i.imgur.com/hidct6S.png";
@@ -309,7 +328,7 @@ function x_getdata() {
 				img = "https://viogit.github.io/ramka/img/5.png";
 			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
-		break;
+			break;
 		default:
 			out = "Unknown value: "+ramka.value;
 	}
@@ -318,10 +337,8 @@ function x_getdata() {
 		out = "<div align=\"center\">"+out+"</div>";
 	}
 	document.getElementById("result").innerHTML = out;
-	document.getElementById("prev").innerHTML = "Пример:<br /><br />"+out;
-
-//	'Data: ' + url.value);
-//	console.log('Рамка id: ' + ramka.value);
+	document.getElementById('content').insertAdjacentHTML('afterend', "<div id=\"content\"><h2>Пример</h2><hr />"+out+"</div>");
+//	console.log('complete');
 }
 
 function x_exemple() {
@@ -334,10 +351,9 @@ function x_exemple() {
 </script>
 
 <div id="wrapper">
+<div id="content">
 <h2>Набор рамок для видео</h2>
 <hr />
-
-<div id="content">
 <table id="const"><tr><td>
 <input type="text" id="url" oninput="x_getdata()"> Ссылка на ролик с YouTube (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
 <br />
@@ -360,8 +376,6 @@ function x_exemple() {
 <textarea id="result" onclick="this.select();" readonly>Вставьте ссылку на youtube ролик</textarea>
 </td></tr></table>
 </div>
-<hr />
-<p><span id="prev"></span></p>
 </div>
 
 <script>
