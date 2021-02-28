@@ -272,7 +272,7 @@ function matchYoutubeUrl(url) {
 function x_getdata() {
 	var url = document.getElementById("url");
 	var ramka = document.getElementById("ramka");
-	var imghost = document.getElementById("imghost");
+//	var imghost = document.getElementById("imghost");
 	var imgcenter = document.getElementById("imgcenter");
 	var select = document.getElementById('wrapper');
 	var check = matchYoutubeUrl(url.value);
@@ -290,43 +290,43 @@ function x_getdata() {
 
 	switch(ramka.value) {
 		case '1':
-			if (imghost.value == 1) {
+//			if (imghost.value == 1) {
 				img = "https://i.imgur.com/8shW7Ny.png";
-			} else {
-				img = "https://xdiloc.github.io/ramka/img/1.png";
-			}
+//			} else {
+//				img = "https://viogit.github.io/ramka/img/1.png";
+//			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '2':
-			if (imghost.value == 1) {
+//			if (imghost.value == 1) {
 				img = "https://i.imgur.com/szJWOKV.png";
-			} else {
-				img = "https://xdiloc.github.io/ramka/img/2.png";
-			}
+//			} else {
+//				img = "https://viogit.github.io/ramka/img/2.png";
+//			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
 			break;
 		case '3':
-			if (imghost.value == 1) {
+//			if (imghost.value == 1) {
 				img = "https://i.imgur.com/4JMY3MH.png";
-			} else {
-				img = "https://xdiloc.github.io/ramka/img/3.png";
-			}
+//			} else {
+//				img = "https://viogit.github.io/ramka/img/3.png";
+//			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
 			break;
 		case '4':
-			if (imghost.value == 1) {
+//			if (imghost.value == 1) {
 				img = "https://i.imgur.com/H4qWT3J.png";
-			} else {
-				img = "https://xdiloc.github.io/ramka/img/4.png";
-			}
+//			} else {
+//				img = "https://viogit.github.io/ramka/img/4.png";
+//			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '5':
-			if (imghost.value == 1) {
+//			if (imghost.value == 1) {
 				img = "https://i.imgur.com/hidct6S.png";
-			} else {
-				img = "https://xdiloc.github.io/ramka/img/5.png";
-			}
+//			} else {
+//				img = "https://viogit.github.io/ramka/img/5.png";
+//			}
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
 			break;
 		default:
@@ -344,7 +344,7 @@ function x_getdata() {
 function x_exemple() {
 	document.getElementById("url").value = "https://www.youtube.com/watch?v=1La4QzGeaaQ";
 	document.getElementById("ramka").selectedIndex = 1;
-	document.getElementById("imghost").selectedIndex = 0;
+//	document.getElementById("imghost").selectedIndex = 0;
 	document.getElementById("imgcenter").checked = false;
 	x_getdata();
 }
@@ -365,11 +365,6 @@ function x_exemple() {
 <option value="5">Белая рамка с тенью</option>
 </select> Вид рамки
 <br />
-<select id="imghost" onchange="x_getdata()">
-<option value="1">imgur.com</option>
-<option value="2">xdiloc.github.io</option>
-</select> Хостинг картинок
-<br />
 <label><input type="checkbox" id="imgcenter" onchange="x_getdata()"><span> Выровнять по центру</span></label>
 </td><td>
 Код для вставки в группы на Mail.Ru<br />
@@ -382,8 +377,15 @@ function x_exemple() {
 // clear
 document.getElementById("url").value = "";
 document.getElementById("ramka").selectedIndex = 0;
-document.getElementById("imghost").selectedIndex = 0;
+//document.getElementById("imghost").selectedIndex = 0;
 document.getElementById("imgcenter").checked = false;
+
+/*
+<select id="imghost" onchange="x_getdata()">
+<option value="1">imgur.com</option>
+<option value="2">viogit.github.io</option>
+</select> Хостинг картинок
+*/
 </script>
 
 </body>
