@@ -290,44 +290,28 @@ function x_getdata() {
 
 	switch(ramka.value) {
 		case '1':
-//			if (imghost.value == 1) {
-				img = "https://i.imgur.com/8shW7Ny.png";
-//			} else {
-//				img = "https://viogit.github.io/ramka/img/1.png";
-//			}
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
-			break;
-		case '2':
-//			if (imghost.value == 1) {
-				img = "https://i.imgur.com/szJWOKV.png";
-//			} else {
-//				img = "https://viogit.github.io/ramka/img/2.png";
-//			}
+			img = "https://i.imgur.com/szJWOKV.png";
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
 			break;
+		case '2':
+			img = "https://i.imgur.com/kKX5MKe.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"12\"></td></tr><tr><td width=\"584\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"9\"></td></tr></table>";
+			break;
 		case '3':
-//			if (imghost.value == 1) {
-				img = "https://i.imgur.com/4JMY3MH.png";
-//			} else {
-//				img = "https://viogit.github.io/ramka/img/3.png";
-//			}
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
+			img = "https://i.imgur.com/8shW7Ny.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '4':
-//			if (imghost.value == 1) {
-				img = "https://i.imgur.com/H4qWT3J.png";
-//			} else {
-//				img = "https://viogit.github.io/ramka/img/4.png";
-//			}
+			img = "https://i.imgur.com/H4qWT3J.png";
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '5':
-//			if (imghost.value == 1) {
-				img = "https://i.imgur.com/hidct6S.png";
-//			} else {
-//				img = "https://viogit.github.io/ramka/img/5.png";
-//			}
+			img = "https://i.imgur.com/hidct6S.png";
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
+			break;
+		case '6':
+			img = "https://i.imgur.com/4JMY3MH.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
 			break;
 		default:
 			out = "Unknown value: "+ramka.value;
@@ -343,8 +327,7 @@ function x_getdata() {
 
 function x_exemple() {
 	document.getElementById("url").value = "https://www.youtube.com/watch?v=1La4QzGeaaQ";
-	document.getElementById("ramka").selectedIndex = 1;
-//	document.getElementById("imghost").selectedIndex = 0;
+	document.getElementById("ramka").selectedIndex = 0;
 	document.getElementById("imgcenter").checked = false;
 	x_getdata();
 }
@@ -358,11 +341,13 @@ function x_exemple() {
 <input type="text" id="url" oninput="x_getdata()"> Ссылка на ролик с YouTube (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
 <br />
 <select id="ramka" onchange="x_getdata()">
-<option value="1">Новогодняя</option>
-<option value="2">C тенью 1</option>
-<option value="3">C тенью 2 (Lena)</option>
+<option value="1">C тенью 1</option>
+<option value="2">Темное дерево</option>
+<option value="3">Новогодняя</option>
 <option value="4">Белая рамка</option>
 <option value="5">Белая рамка с тенью</option>
+<option value="6">C тенью 2 (Lena)</option>
+
 </select> Вид рамки
 <br />
 <label><input type="checkbox" id="imgcenter" onchange="x_getdata()"><span> Выровнять по центру</span></label>
@@ -377,15 +362,7 @@ function x_exemple() {
 // clear
 document.getElementById("url").value = "";
 document.getElementById("ramka").selectedIndex = 0;
-//document.getElementById("imghost").selectedIndex = 0;
 document.getElementById("imgcenter").checked = false;
-
-/*
-<select id="imghost" onchange="x_getdata()">
-<option value="1">imgur.com</option>
-<option value="2">viogit.github.io</option>
-</select> Хостинг картинок
-*/
 </script>
 
 </body>
