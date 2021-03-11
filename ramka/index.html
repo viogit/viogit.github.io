@@ -269,12 +269,68 @@ function matchYoutubeUrl(url) {
 	return (url.match(p)) ? RegExp.$1 : false;
 }
 
-function x_getdata() {
+function x_run() {
 	var url = document.getElementById("url");
+	var check = matchYoutubeUrl(url.value);
+	if (check == false || url.value.length == 0) {
+		return;
+	}
+
+	document.getElementById('thumbnail').innerHTML = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
+	console.log('complete');
+}
+
+function x_work(check, thumbnail) {
 	var ramka = document.getElementById("ramka");
-//	var imghost = document.getElementById("imghost");
 	var imgcenter = document.getElementById("imgcenter");
+	var out, img, video, thumbnail, suko = "";
+
+	if (thumbnail == 0) {
+		video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
+	} else {
+		video = "<img onclick=\"x_run()\" style=\"width: 560px; height: 315px;\" src=\"http://img.youtube.com/vi/"+check+"/maxresdefault.jpg\" />";
+		suko = " id=\"thumbnail\"";
+	}
+
+	switch(ramka.value) {
+		case '1':
+			img = "https://i.imgur.com/szJWOKV.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td"+suko+" width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
+			break;
+		case '2':
+			img = "https://i.imgur.com/RnKjW9r.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"12\"></td></tr><tr><td"+suko+" width=\"584\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"9\"></td></tr></table>";
+			break;
+		case '3':
+			img = "https://i.imgur.com/8shW7Ny.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td"+suko+" width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
+			break;
+		case '4':
+			img = "https://i.imgur.com/H4qWT3J.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td"+suko+" width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
+			break;
+		case '5':
+			img = "https://i.imgur.com/hidct6S.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td"+suko+" width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
+			break;
+		case '6':
+			img = "https://i.imgur.com/4JMY3MH.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td"+suko+" width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
+			break;
+		default:
+			out = "Unknown value: "+ramka.value;
+	}
+
+	if (imgcenter.checked) {
+		out = "<div align=\"center\">"+out+"</div>";
+	}
+
+	return out;
+}
+
+function x_getdata() {
 	var select = document.getElementById('wrapper');
+	var url = document.getElementById("url");
 	var check = matchYoutubeUrl(url.value);
 
 	if (select.childElementCount > 1) {
@@ -286,42 +342,8 @@ function x_getdata() {
 		return;
 	}
 
-	var out, img, video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
-
-	switch(ramka.value) {
-		case '1':
-			img = "https://i.imgur.com/szJWOKV.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
-			break;
-		case '2':
-			img = "https://i.imgur.com/RnKjW9r.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"12\"></td></tr><tr><td width=\"584\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"9\"></td></tr></table>";
-			break;
-		case '3':
-			img = "https://i.imgur.com/8shW7Ny.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
-			break;
-		case '4':
-			img = "https://i.imgur.com/H4qWT3J.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
-			break;
-		case '5':
-			img = "https://i.imgur.com/hidct6S.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
-			break;
-		case '6':
-			img = "https://i.imgur.com/4JMY3MH.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
-			break;
-		default:
-			out = "Unknown value: "+ramka.value;
-	}
-
-	if (imgcenter.checked) {
-		out = "<div align=\"center\">"+out+"</div>";
-	}
-	document.getElementById("result").innerHTML = out;
-	document.getElementById('content').insertAdjacentHTML('afterend', "<div id=\"content\"><h2>Пример</h2><hr />"+out+"</div>");
+	document.getElementById("result").innerHTML = x_work(check, 0);
+	document.getElementById('content').insertAdjacentHTML('afterend', "<div id=\"content\"><h2>Пример</h2><hr />"+x_work(check, 1)+"</div>");
 //	console.log('complete');
 }
 
