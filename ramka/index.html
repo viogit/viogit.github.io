@@ -269,18 +269,18 @@ function matchYoutubeUrl(url) {
 	return (url.match(p)) ? RegExp.$1 : false;
 }
 
-function x_run() {
+function x_thumbnail() {
 	var url = document.getElementById("url");
 	var check = matchYoutubeUrl(url.value);
 	if (check == false || url.value.length == 0) {
 		return;
 	}
 
-	document.getElementById('thumbnail').innerHTML = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
-	console.log('complete');
+	document.getElementById('thumbnail').innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/"+check+"\" frameborder=\"0\" allowfullscreen></iframe>";
+//	console.log('thumbnail remove');
 }
 
-function x_work(check, thumbnail) {
+function x_gen(check, thumbnail) {
 	var ramka = document.getElementById("ramka");
 	var imgcenter = document.getElementById("imgcenter");
 	var out, img, video, thumbnail, suko = "";
@@ -288,7 +288,7 @@ function x_work(check, thumbnail) {
 	if (thumbnail == 0) {
 		video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
 	} else {
-		video = "<img onclick=\"x_run()\" style=\"width: 560px; height: 315px;\" src=\"http://img.youtube.com/vi/"+check+"/mqdefault.jpg\" />";
+		video = "<img onclick=\"x_thumbnail()\" style=\"width: 560px; height: 315px;\" src=\"http://img.youtube.com/vi/"+check+"/mqdefault.jpg\" />";
 		suko = " id=\"thumbnail\"";
 	}
 
@@ -298,8 +298,8 @@ function x_work(check, thumbnail) {
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td"+suko+" width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
 			break;
 		case '2':
-			img = "https://i.imgur.com/RnKjW9r.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"12\"></td></tr><tr><td"+suko+" width=\"584\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"9\"></td></tr></table>";
+			img = "https://i.imgur.com/pODfvGZ.png";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td"+suko+" width=\"576\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"3\"></td></tr></table>";
 			break;
 		case '3':
 			img = "https://i.imgur.com/8shW7Ny.png";
@@ -313,10 +313,6 @@ function x_work(check, thumbnail) {
 			img = "https://i.imgur.com/hidct6S.png";
 			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td"+suko+" width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
 			break;
-		case '6':
-			img = "https://i.imgur.com/4JMY3MH.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"4\"></td></tr><tr><td"+suko+" width=\"590\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"18\"></td></tr></table>";
-			break;
 		default:
 			out = "Unknown value: "+ramka.value;
 	}
@@ -328,7 +324,7 @@ function x_work(check, thumbnail) {
 	return out;
 }
 
-function x_getdata() {
+function x_load() {
 	var select = document.getElementById('wrapper');
 	var url = document.getElementById("url");
 	var check = matchYoutubeUrl(url.value);
@@ -342,8 +338,8 @@ function x_getdata() {
 		return;
 	}
 
-	document.getElementById("result").innerHTML = x_work(check, 0);
-	document.getElementById('content').insertAdjacentHTML('afterend', "<div id=\"content\"><h2>Пример</h2><hr />"+x_work(check, 1)+"</div>");
+	document.getElementById("result").innerHTML = x_gen(check, 0);
+	document.getElementById('content').insertAdjacentHTML('afterend', "<div id=\"content\"><h2>Пример</h2><hr />"+x_gen(check, 1)+"</div>");
 //	console.log('complete');
 }
 
@@ -351,7 +347,7 @@ function x_exemple() {
 	document.getElementById("url").value = "https://www.youtube.com/watch?v=1La4QzGeaaQ";
 	document.getElementById("ramka").selectedIndex = 0;
 	document.getElementById("imgcenter").checked = false;
-	x_getdata();
+	x_load();
 }
 </script>
 
@@ -360,19 +356,18 @@ function x_exemple() {
 <h2>Набор рамок для видео</h2>
 <hr />
 <table id="const"><tr><td>
-<input type="text" id="url" oninput="x_getdata()"> Ссылка на ролик с YouTube (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
+<input type="text" id="url" oninput="x_load()"> Ссылка на ролик с YouTube (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
 <br />
-<select id="ramka" onchange="x_getdata()">
-<option value="1">C тенью 1</option>
-<option value="2">Камуфляж</option>
+<select id="ramka" onchange="x_load()">
+<option value="1">C тенью</option>
+<option value="2">Неон</option>
 <option value="3">Новогодняя</option>
 <option value="4">Белая рамка</option>
 <option value="5">Белая рамка с тенью</option>
-<option value="6">C тенью 2 (Lena)</option>
 
 </select> Вид рамки
 <br />
-<label><input type="checkbox" id="imgcenter" onchange="x_getdata()"><span> Выровнять по центру</span></label>
+<label><input type="checkbox" id="imgcenter" onchange="x_load()"><span> Выровнять по центру</span></label>
 </td><td>
 Код для вставки в группы на Mail.Ru<br />
 <textarea id="result" onclick="this.select();" readonly>Вставьте ссылку на youtube ролик</textarea>
