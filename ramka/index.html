@@ -265,53 +265,49 @@ input[type="checkbox"]:disabled+span {
 
 <script>
 function matchYoutubeUrl(url) {
+	if (url.length == 0) return false;
 	var p = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 	return (url.match(p)) ? RegExp.$1 : false;
 }
 
 function x_thumbnail() {
-	var url = document.getElementById("url");
-	var check = matchYoutubeUrl(url.value);
-	if (check == false || url.value.length == 0) {
-		return;
-	}
+	var check = matchYoutubeUrl(document.getElementById("url").value);
+	if (check == false) return;
 
-	document.getElementById('thumbnail').innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/"+check+"\" frameborder=\"0\" allowfullscreen></iframe>";
-//	console.log('thumbnail remove');
+	document.getElementById("thumbnail").parentElement.innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/"+check+"\" frameborder=\"0\" allowfullscreen></iframe>";
 }
 
 function x_gen(check, thumbnail) {
 	var ramka = document.getElementById("ramka");
 	var imgcenter = document.getElementById("imgcenter");
-	var out, img, video, thumbnail, suko = "";
+	var out, img, video, thumbnail;
 
 	if (thumbnail == 0) {
 		video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
 	} else {
-		video = "<img onclick=\"x_thumbnail()\" style=\"width: 560px; height: 315px;\" src=\"http://img.youtube.com/vi/"+check+"/mqdefault.jpg\" />";
-		suko = " id=\"thumbnail\"";
+		video = "<img id=\"thumbnail\"onclick=\"x_thumbnail()\" style=\"width: 560px; height: 315px;\" src=\"http://img.youtube.com/vi/"+check+"/mqdefault.jpg\" />";
 	}
 
 	switch(ramka.value) {
 		case '1':
 			img = "https://i.imgur.com/szJWOKV.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td"+suko+" width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"578\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"7\"></td></tr></table>";
 			break;
 		case '2':
 			img = "https://i.imgur.com/pODfvGZ.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td"+suko+" width=\"576\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"3\"></td></tr></table>";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"7\"></td></tr><tr><td width=\"576\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"3\"></td></tr></table>";
 			break;
 		case '3':
 			img = "https://i.imgur.com/8shW7Ny.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td"+suko+" width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '4':
 			img = "https://i.imgur.com/H4qWT3J.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td"+suko+" width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td height=\"14\"></td></tr><tr><td width=\"589\" height=\"315\" align=\"center\">"+video+"</td></tr><tr><td height=\"11\"></td></tr></table>";
 			break;
 		case '5':
 			img = "https://i.imgur.com/hidct6S.png";
-			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td"+suko+" width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
+			out = "<table background=\""+img+"\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"589\" height=\"346\" align=\"center\">"+video+"<tr><td width=\"589\" height=\"20\"></td></tr></table>";
 			break;
 		default:
 			out = "Unknown value: "+ramka.value;
@@ -326,14 +322,13 @@ function x_gen(check, thumbnail) {
 
 function x_load() {
 	var select = document.getElementById('wrapper');
-	var url = document.getElementById("url");
-	var check = matchYoutubeUrl(url.value);
+	var check = matchYoutubeUrl(document.getElementById("url").value);
 
 	if (select.childElementCount > 1) {
 		select.removeChild(select.lastElementChild);
 	}
 
-	if (check == false || url.value.length == 0) {
+	if (check == false) {
 		document.getElementById("result").innerHTML = "Вставьте ссылку на youtube ролик";
 		return;
 	}
@@ -356,7 +351,7 @@ function x_exemple() {
 <h2>Набор рамок для видео</h2>
 <hr />
 <table id="const"><tr><td>
-<input type="text" id="url" oninput="x_load()"> Ссылка на ролик с YouTube (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
+<input type="text" id="url" oninput="x_load()"> Ссылка на ролик с YouTube
 <br />
 <select id="ramka" onchange="x_load()">
 <option value="1">C тенью</option>
@@ -365,7 +360,7 @@ function x_exemple() {
 <option value="4">Белая рамка</option>
 <option value="5">Белая рамка с тенью</option>
 
-</select> Вид рамки
+</select> Вид рамки (<a href="javascript:x_exemple();" title="exemple">Пример</a>)
 <br />
 <label><input type="checkbox" id="imgcenter" onchange="x_load()"><span> Выровнять по центру</span></label>
 </td><td>
