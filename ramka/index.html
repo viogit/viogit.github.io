@@ -258,6 +258,42 @@ input[type="checkbox"]:indeterminate + span:before {
 input[type="checkbox"]:disabled+span {
 	color: #999;
 }
+
+.icon {
+	cursor: pointer;
+	background: rgba(0,0,0,0.55);
+	width: 60px;
+	height: 29px;
+	border-radius: 6px;
+	padding-top: 12px;
+	position: relative;
+	margin: 0 auto;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	transition: all 0.15s ease;
+}
+
+#thumbnail:hover .icon {
+	background: rgba(225, 0, 0, 1);
+}
+
+#thumbnail {
+	width: 560px;
+	height: 315px; 
+	background-size: cover;
+	margin-bottom: 3px;
+}
+
+.tri {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 9px 0 9px 18px;
+	border-color: transparent transparent transparent #ffffff;
+	margin: 0 auto;
+}
 </style>
 <!-- style -->
 </head>
@@ -274,7 +310,7 @@ function x_thumbnail() {
 	var check = matchYoutubeUrl(document.getElementById("url").value);
 	if (check == false) return;
 
-	document.getElementById("thumbnail").parentElement.innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/"+check+"\" frameborder=\"0\" allowfullscreen></iframe>";
+	document.getElementById("thumbnail").parentElement.innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/"+check+"?autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>";
 }
 
 function x_gen(check, thumbnail) {
@@ -285,7 +321,7 @@ function x_gen(check, thumbnail) {
 	if (thumbnail == 0) {
 		video = "<embed allowfullscreen=\"true\" src=\"https://www.youtube.com/v/"+check+"&rel=0\" type=\"application/x-shockwave-flash\" width=\"560\" height=\"315\" />";
 	} else {
-		video = "<img id=\"thumbnail\" onclick=\"x_thumbnail()\" style=\"width: 560px; height: 315px;\" src=\"https://img.youtube.com/vi/"+check+"/mqdefault.jpg\" />";
+		video = "<div id=\"thumbnail\" onclick=\"x_thumbnail()\" style=\"background-image: url(https://img.youtube.com/vi/"+check+"/mqdefault.jpg);\"><div class=\"icon\"><div class=\"tri\"></div></div></div>";
 	}
 
 	switch(ramka.value) {
